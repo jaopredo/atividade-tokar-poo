@@ -1,5 +1,5 @@
 from employee import Employee
-from instrument import Instrument
+from instrument import *
 
 
 class Store:
@@ -60,6 +60,23 @@ class Store:
             if emp.position == position:
                 counter += 1
         return counter
+
+    def how_much_instruments(self):
+        infos = {
+            'violao': 0,
+            'guitarra': 0,
+            'baixo': 0
+        }
+
+        for inst in self.__stock:
+            if isinstance(inst, Violao):
+                infos['violao'] += 1
+            elif isinstance(inst, Guitarra):
+                infos['guitarra'] += 1
+            elif isinstance(inst, Baixo):
+                infos['baixo'] += 1
+        
+        return infos
 
     @property
     def employees(self):

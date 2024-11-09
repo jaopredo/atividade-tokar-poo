@@ -148,3 +148,18 @@ class StoreTests(unittest.TestCase):
         self.assertEqual(store1.count_employees_by_position('Technician'), 4)
         self.assertEqual(store1.count_employees_by_position('Analyst'), 4)
         self.assertEqual(store1.count_employees_by_position('Clerk'), 2)
+
+    def test_count_instrument_type(self):
+        """Testando se está contando corretamente cada tipo de instrumento
+        """
+        store = Store('São Paulo')
+
+        guitarra = Guitarra('x', 'y', 2000, 12)
+        baixo = Baixo('a', 'b', 3000, 4)
+        violao = Violao('c', 'd', 1500, 6)
+
+        store.add_instrument(guitarra)
+        store.add_instrument(baixo)
+        store.add_instrument(violao)
+
+        self.assertEqual(store.how_much_instruments(), { 'violao': 1, 'guitarra': 1, 'baixo': 1 })
