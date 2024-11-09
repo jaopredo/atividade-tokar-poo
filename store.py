@@ -40,3 +40,5 @@ class Store:
                 raise ValueError("O Número passado não corresponde ao ID de nenhum funcionário")
         else:
             raise TypeError("Você não forneceu um parâmetro válido")
+    
+    
