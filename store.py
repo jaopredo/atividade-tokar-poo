@@ -14,9 +14,12 @@ class Store:
             employee (Employee | dict): Uma instância de funcionário ou um dicionário com as informações do funcionário
         """
         if isinstance(employee, dict):
-            self.__employees.append(Employee(**employee))
+            self.__employees.append(Employee(store=self, **employee))
         elif isinstance(employee, Employee):
-            self.__employees.append(employee)
+            if employee.store == self:
+                self.__employees.append(employee)
+            else:
+                raise TypeError("Você quer adicionar nesta loja um funcionário que não é desta loja")
         else:
             raise TypeError("Você não forneceu informações válidas sobre um funcionário")
     
@@ -41,4 +44,7 @@ class Store:
         else:
             raise TypeError("Você não forneceu um parâmetro válido")
     
+    @property
+    def employees(self):
+        return self.__employees
     
