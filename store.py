@@ -1,25 +1,21 @@
 from employee import Employee
+from instrument import Instrument
 
 
 class Store:
     def __init__(self, location):
-        self.__location = location
+        self.location = location
         self.__employees: list[Employee] = []
         self.__stock = []
     
-    def hire_employee(self, employee):
+    def hire_employee(self, employee: dict):
         """Função responsável por adicionar pessoas no quadro de funcionários
 
         Args:
-            employee (Employee | dict): Uma instância de funcionário ou um dicionário com as informações do funcionário
+            employee (dict): Dicionário com as informações do funcionário
         """
         if isinstance(employee, dict):
             self.__employees.append(Employee(store=self, **employee))
-        elif isinstance(employee, Employee):
-            if employee.store == self:
-                self.__employees.append(employee)
-            else:
-                raise TypeError("Você quer adicionar nesta loja um funcionário que não é desta loja")
         else:
             raise TypeError("Você não forneceu informações válidas sobre um funcionário")
     
@@ -44,7 +40,31 @@ class Store:
         else:
             raise TypeError("Você não forneceu um parâmetro válido")
     
+    def add_instrument(self, instrument: Instrument):
+        if isinstance(instrument, Instrument):
+            self.__stock.append(instrument)
+        else:
+            raise TypeError("Você não está passando um instrumento para ser adicionado")
+    
+    def remove_instrument(self, index: int):
+        if isinstance(index, int) and 0 <= index < len(self.__stock):
+            for i, _ in enumerate(self.__stock):
+                if i == index:
+                    self.__stock.pop(i)
+        else:
+            raise TypeError("Você passou um parâmetro inválido")
+
+    def count_employees_by_position(self, position):
+        counter = 0
+        for emp in self.__employees:
+            if emp.position == position:
+                counter += 1
+
     @property
     def employees(self):
         return self.__employees
+    
+    @property
+    def stock(self):
+        return self.__stock
     
