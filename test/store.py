@@ -111,3 +111,40 @@ class StoreTests(unittest.TestCase):
         store.remove_instrument(1)
 
         self.assertEqual(store.stock, [ guitarra, violao ])
+
+    def test_count_by_position(self):
+        """Testando função de contar quantos funcionários de um cargo tem
+        """
+        store1 = Store('Brasil')
+        
+        employees = [
+            {'name': 'Diana', 'salary': 7500, 'position': 'Technician', 'cpf': '326.812.741-41'},
+            {'name': 'Jack', 'salary': 5500, 'position': 'Engineer', 'cpf': '168.405.410-74'},
+            {'name': 'Diana', 'salary': 7500, 'position': 'Engineer', 'cpf': '664.794.997-27'},
+            {'name': 'Alice', 'salary': 9500, 'position': 'Technician', 'cpf': '507.796.968-59'},
+            {'name': 'Ivy', 'salary': 5000, 'position': 'Technician', 'cpf': '124.448.392-67'},
+            {'name': 'Carlos', 'salary': 3000, 'position': 'Manager', 'cpf': '481.231.422-27'},
+            {'name': 'Gina', 'salary': 7500, 'position': 'Clerk', 'cpf': '459.185.884-27'},
+            {'name': 'Diana', 'salary': 6500, 'position': 'Analyst', 'cpf': '272.305.809-25'},
+            {'name': 'Ivy', 'salary': 9000, 'position': 'Analyst', 'cpf': '258.571.337-10'},
+            {'name': 'Gina', 'salary': 9500, 'position': 'Engineer', 'cpf': '598.390.253-18'},
+            {'name': 'Diana', 'salary': 6000, 'position': 'Engineer', 'cpf': '548.860.625-88'},
+            {'name': 'Diana', 'salary': 5500, 'position': 'Technician', 'cpf': '222.475.341-11'},
+            {'name': 'Diana', 'salary': 3500, 'position': 'Clerk', 'cpf': '273.150.899-85'},
+            {'name': 'Jack', 'salary': 3000, 'position': 'Engineer', 'cpf': '790.652.796-63'},
+            {'name': 'Ivy', 'salary': 4000, 'position': 'Manager', 'cpf': '111.833.866-76'},
+            {'name': 'Frank', 'salary': 9500, 'position': 'Analyst', 'cpf': '826.920.916-79'},
+            {'name': 'Alice', 'salary': 8000, 'position': 'Manager', 'cpf': '237.300.139-13'},
+            {'name': 'Eve', 'salary': 4000, 'position': 'Analyst', 'cpf': '270.761.490-14'},
+            {'name': 'Henry', 'salary': 6500, 'position': 'Manager', 'cpf': '245.817.323-74'},
+            {'name': 'Frank', 'salary': 8000, 'position': 'Manager', 'cpf': '936.620.823-17'}
+        ]
+
+        for employee in employees:
+            store1.hire_employee(employee)
+
+        self.assertEqual(store1.count_employees_by_position('Engineer'), 5)
+        self.assertEqual(store1.count_employees_by_position('Manager'), 5)
+        self.assertEqual(store1.count_employees_by_position('Technician'), 4)
+        self.assertEqual(store1.count_employees_by_position('Analyst'), 4)
+        self.assertEqual(store1.count_employees_by_position('Clerk'), 2)

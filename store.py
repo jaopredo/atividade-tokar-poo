@@ -59,6 +59,7 @@ class Store:
         for emp in self.__employees:
             if emp.position == position:
                 counter += 1
+        return counter
 
     @property
     def employees(self):
